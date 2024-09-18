@@ -1,10 +1,10 @@
 name: payoff_matrix
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0
 
 environment:
-  sdk: '>=3.2.3 <4.0.0'
+  sdk: ">=3.5.2 <4.0.0"
 
 dependencies:
   animated_text_kit: ^4.2.2
