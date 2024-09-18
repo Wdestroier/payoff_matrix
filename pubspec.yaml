@@ -1,0 +1,26 @@
+name: payoff_matrix
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.2.3 <4.0.0'
+
+dependencies:
+  animated_text_kit: ^4.2.2
+  collection: ^1.18.0
+  data_table_2: ^2.5.9
+  flutter:
+    sdk: flutter
+  flutter_riverpod: ^2.4.9
+  flutter_speed_dial: ^7.0.0
+  hive_flutter: ^1.1.0
+  ulid: ^2.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
