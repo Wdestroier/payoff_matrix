@@ -1,5 +1,4 @@
 import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
 
 class ExpandableFab extends StatefulWidget {
@@ -8,10 +7,10 @@ class ExpandableFab extends StatefulWidget {
   final List<Widget> children;
 
   const ExpandableFab({
-    super.key,
     this.initialOpen,
     required this.distance,
     required this.children,
+    super.key,
   });
 
   @override

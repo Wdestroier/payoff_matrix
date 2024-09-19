@@ -1,0 +1,4 @@
+enum DecisionScenario {
+  underUncertainty,
+  underRisk;
+}
