@@ -7,11 +7,13 @@ environment:
   sdk: ">=3.5.2 <4.0.0"
 
 dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   animated_text_kit: ^4.2.2
   collection: ^1.18.0
   data_table_2: ^2.5.9
-  flutter:
-    sdk: flutter
   flutter_riverpod: ^2.4.9
   flutter_speed_dial: ^7.0.0
   hive_flutter: ^1.1.0

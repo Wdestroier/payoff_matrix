@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:payoff_matrix/states/translations_state.dart';
 import 'package:ulid/ulid.dart';
 
 import '../models/payoff_matrix.dart';
@@ -45,8 +46,8 @@ class _PopulatedMatrixListScreenState
               width: 40,
             ),
             title: Text(payoffMatrix.name),
-            subtitle:
-                Text('Atualizado em ${updatedAt.date} às ${updatedAt.time}'),
+            subtitle: Text(translations.populatedMatrixListScreen
+                .updatedOnAt(updatedAt.date, updatedAt.time)),
             trailing: SizedBox(
               width: 96,
               height: 64,
@@ -54,13 +55,13 @@ class _PopulatedMatrixListScreenState
                 children: [
                   IconButton(
                     icon: const Icon(Icons.edit_rounded),
-                    tooltip: 'Editar',
+                    tooltip: translations.populatedMatrixListScreen.edit,
                     onPressed: openEditView,
                   ),
                   const SizedBox(width: 8),
                   IconButton(
                     icon: const Icon(Icons.delete_rounded),
-                    tooltip: 'Apagar',
+                    tooltip: translations.populatedMatrixListScreen.delete,
                     onPressed: () async {
                       final deleted =
                           await MatrixRepository().delete(payoffMatrix.id);

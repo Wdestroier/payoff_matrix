@@ -3,6 +3,7 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:payoff_matrix/states/translations_state.dart';
 
 import '../models/decision_scenario.dart';
 import '../models/payoff_matrix.dart';
@@ -48,46 +49,61 @@ class EditMatrixScreen extends ConsumerWidget {
                 const DataColumn2(
                   label: Text('#'),
                 ),
-                ...payoffMatrix.natureStates
-                    .mapIndexed((index, natureState) => DataColumn2(
-                            label: Column(
-                          children: [
-                            InlineEditableText(
-                              natureState.name,
-                              onSubmitted: (submittedName) {
-                                payoffMatrix.natureStates[index].name =
-                                    submittedName;
-                                MatrixRepository().update(payoffMatrix);
-                                updatePayoffMatrix(ref, payoffMatrix);
-                              },
-                            ),
-                            if (payoffMatrix.decisionScenario ==
-                                DecisionScenario.underRisk) ...[
-                              const Text('Probabilidade:'),
-                              InlineEditableText(
-                                natureState.probability.toStringAsFixed(2),
-                                onSubmitted: (submittedName) {
-                                  payoffMatrix.natureStates[index].probability =
-                                      double.parse(submittedName);
-                                  MatrixRepository().update(payoffMatrix);
-                                  updatePayoffMatrix(ref, payoffMatrix);
-                                },
-                              ),
-                            ]
-                          ],
-                        ))),
+                ...payoffMatrix.natureStates.mapIndexed((index, natureState) =>
+                    DataColumn2(
+                        label: Column(
+                      children: [
+                        InlineEditableText(
+                          natureState.name,
+                          onSubmitted: (submittedName) {
+                            payoffMatrix.natureStates[index].name =
+                                submittedName;
+                            MatrixRepository().update(payoffMatrix);
+                            updatePayoffMatrix(ref, payoffMatrix);
+                          },
+                        ),
+                        if (payoffMatrix.decisionScenario ==
+                            DecisionScenario.underRisk) ...[
+                          Text('${translations.editMatrixScreen.probability}:'),
+                          InlineEditableText(
+                            natureState.probability.toStringAsFixed(2),
+                            onSubmitted: (submittedName) {
+                              payoffMatrix.natureStates[index].probability =
+                                  double.parse(submittedName);
+                              MatrixRepository().update(payoffMatrix);
+                              updatePayoffMatrix(ref, payoffMatrix);
+                            },
+                          ),
+                        ]
+                      ],
+                    ))),
                 const DataColumn2(label: Text('')),
                 ...switch (payoffMatrix.decisionScenario) {
                   DecisionScenario.underUncertainty => [
-                      const DataColumn2(label: Text('Maximax')),
-                      const DataColumn2(label: Text('Maximin')),
-                      const DataColumn2(label: Text('Laplace')),
-                      const DataColumn2(label: Text('Savage')),
-                      const DataColumn2(label: Text('Hurwicz α=1')),
+                      DataColumn2(
+                        label: Text(translations.editMatrixScreen.maximax),
+                      ),
+                      DataColumn2(
+                        label: Text(translations.editMatrixScreen.maximin),
+                      ),
+                      DataColumn2(
+                        label: Text(translations.editMatrixScreen.laplace),
+                      ),
+                      DataColumn2(
+                        label: Text(translations.editMatrixScreen.laplace),
+                      ),
+                      DataColumn2(
+                        label: Text(
+                            '${translations.editMatrixScreen.hurwicz} α=1'),
+                      ),
                     ],
                   DecisionScenario.underRisk => [
-                      const DataColumn2(label: Text('VEA')),
-                      const DataColumn2(label: Text('VEIP')),
+                      DataColumn2(
+                        label: Text(translations.editMatrixScreen.vea),
+                      ),
+                      DataColumn2(
+                        label: Text(translations.editMatrixScreen.veip),
+                      ),
                     ]
                 }
               ],
@@ -143,7 +159,8 @@ class EditMatrixScreen extends ConsumerWidget {
                       return [
                         DataCell(Wrap(
                           children: [
-                            const Text('Melhor alternativa: '),
+                            Text(
+                                '${translations.editMatrixScreen.melhorAlternativa}: '),
                             Text(bestAlternative.first),
                           ],
                         )),

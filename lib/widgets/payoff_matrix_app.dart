@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:payoff_matrix/widgets/screen_router.dart';
 
@@ -7,6 +8,7 @@ import '../models/nature_state.dart';
 import '../repositories/matrix_repository.dart';
 import '../states/active_screen_state.dart';
 import '../states/editing_matrix_state.dart';
+import '../states/translations_state.dart';
 import 'expandable_fab.dart';
 import 'mini_increment_fab.dart';
 
@@ -18,21 +20,21 @@ class DrawerDestination {
   const DrawerDestination(this.label, this.icon, this.selectedIcon);
 }
 
-const _destinations = <DrawerDestination>[
+final _destinations = <DrawerDestination>[
   DrawerDestination(
-    'Matrizes',
-    Icon(Icons.list_alt_outlined),
-    Icon(Icons.list_alt),
+    translations.payoffMatrixApp.matrices,
+    const Icon(Icons.list_alt_outlined),
+    const Icon(Icons.list_alt),
   ),
   DrawerDestination(
-    'Nova matriz',
-    Icon(Icons.add_box_outlined),
-    Icon(Icons.add_box),
+    translations.payoffMatrixApp.newMatrix,
+    const Icon(Icons.add_box_outlined),
+    const Icon(Icons.add_box),
   ),
   DrawerDestination(
-    'Config',
-    Icon(Icons.settings_outlined),
-    Icon(Icons.settings),
+    translations.payoffMatrixApp.config,
+    const Icon(Icons.settings_outlined),
+    const Icon(Icons.settings),
   ),
 ];
 
@@ -50,16 +52,23 @@ class _PayoffMatrixAppState extends ConsumerState<PayoffMatrixApp> {
 
   @override
   Widget build(BuildContext context) {
-    return ProviderScope(
-      child: Builder(
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(useMaterial3: true),
+      localizationsDelegates: GlobalMaterialLocalizations.delegates,
+      supportedLocales: const [
+        Locale('en'),
+        //  Locale('pt'),
+      ],
+      home: Builder(
         builder: (context) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(useMaterial3: true),
-            home: showNavigationDrawer
-                ? buildDrawerScaffold(context)
-                : buildBottomBarScaffold(),
-          );
+          // Localizations.localeOf(context) is only available after the
+          // MaterialApp widget is built.
+          updateCurrentTranslations(context);
+
+          return showNavigationDrawer
+              ? buildDrawerScaffold(context)
+              : buildBottomBarScaffold();
         },
       ),
     );
@@ -165,7 +174,8 @@ class _PayoffMatrixAppState extends ConsumerState<PayoffMatrixApp> {
                 onPressed: () async {
                   payoffMatrix
                     ..alternatives.add(Alternative(
-                      name: 'Alternativa ${payoffMatrix.alternatives.length}',
+                      name:
+                          '${translations.payoffMatrixApp.alternative} ${payoffMatrix.alternatives.length}',
                     ))
                     ..values.add(List<int>.filled(
                         payoffMatrix.natureStates.length, 0,
@@ -181,7 +191,7 @@ class _PayoffMatrixAppState extends ConsumerState<PayoffMatrixApp> {
                   payoffMatrix
                     ..natureStates.add(NatureState(
                       name:
-                          'Estado da Natureza ${payoffMatrix.natureStates.length}',
+                          '${translations.payoffMatrixApp.natureState} ${payoffMatrix.natureStates.length}',
                       probability: 1.0,
                     ))
                     ..values.forEach((value) => value.add(0));

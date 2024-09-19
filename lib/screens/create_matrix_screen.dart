@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../services/matrix_service.dart';
 import '../states/editing_matrix_state.dart';
+import '../states/translations_state.dart';
 
 class CreateMatrixScreen extends ConsumerWidget {
   const CreateMatrixScreen({super.key});
@@ -15,7 +16,7 @@ class CreateMatrixScreen extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Nova matriz',
+              translations.createMatrixScreen.newMatrix,
               style: Theme.of(context).textTheme.displayMedium,
             ),
             const SizedBox(height: 16),
@@ -29,7 +30,8 @@ class CreateMatrixScreen extends ConsumerWidget {
                     updatePayoffMatrix(
                         ref, await MatrixService().createUnderUncertainty());
                   },
-                  child: const Text('Decisão sob incerteza'),
+                  child: Text(
+                      translations.createMatrixScreen.decisionUnderUncertainty),
                 ),
                 const SizedBox(
                   width: 16,
@@ -40,7 +42,8 @@ class CreateMatrixScreen extends ConsumerWidget {
                     updatePayoffMatrix(
                         ref, await MatrixService().createUnderRisk());
                   },
-                  child: const Text('Decisão sob risco'),
+                  child:
+                      Text(translations.createMatrixScreen.decisionUnderRisk),
                 ),
               ],
             )
