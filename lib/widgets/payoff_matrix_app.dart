@@ -58,7 +58,7 @@ class _PayoffMatrixAppState extends ConsumerState<PayoffMatrixApp> {
       localizationsDelegates: GlobalMaterialLocalizations.delegates,
       supportedLocales: const [
         Locale('en'),
-        //  Locale('pt'),
+        Locale('pt'),
       ],
       home: Builder(
         builder: (context) {

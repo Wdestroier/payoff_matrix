@@ -38,7 +38,8 @@ class EditMatrixScreen extends ConsumerWidget {
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: DataTable2(
-              dataRowHeight: 60,
+              dataRowHeight: MediaQuery.sizeOf(context).width > 1000 ? 60 : 80,
+              minWidth: 800 + payoffMatrix.natureStates.length * 100,
               headingRowHeight:
                   payoffMatrix.decisionScenario == DecisionScenario.underRisk
                       ? 70

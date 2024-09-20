@@ -72,7 +72,7 @@ class PopulatedMatrixListScreenPtBrTranslations
     extends PopulatedMatrixListScreenTranslations {
   @override
   String updatedOnAt(String date, String time) =>
-      'Atualizado em $date às $time}';
+      'Atualizado em $date às $time';
   @override
   String get edit => 'Editar';
   @override
