@@ -91,7 +91,7 @@ class EditMatrixScreen extends ConsumerWidget {
                         label: Text(translations.editMatrixScreen.laplace),
                       ),
                       DataColumn2(
-                        label: Text(translations.editMatrixScreen.laplace),
+                        label: Text(translations.editMatrixScreen.savage),
                       ),
                       DataColumn2(
                         label: Text(
